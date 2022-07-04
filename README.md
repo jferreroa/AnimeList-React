@@ -2,4 +2,4 @@
 
 
 
-![qry](QUERY.PNG)
+![qry](query.png)
