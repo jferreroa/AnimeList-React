@@ -44,22 +44,25 @@ query($page: Int, $genreIn: [String], $formatIn: [MediaFormat], $episodes: Int, 
 
 type ListaInputs = {
     format:string | undefined,
-    genre:string | undefined
+    genre:string | undefined,
+    popularity: number
 }
 
 
 
-export const Lista:FC<ListaInputs> = ({format,genre}) => {
+export const Lista:FC<ListaInputs> = ({format,genre,popularity}) => {
     const [pagina, setPagina] = useState<number>(1)
     const [genero, setGenero] = useState<string | undefined>(undefined)
     const [formato, setFormato] = useState<string | undefined>(undefined)
+    const [popularidad, setPopularidad] = useState<number>(0)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, loading, error, refetch } = useQuery<tipo_ResultadoQuery>(GET_PAGE, {
         variables: {
             page: pagina,
             genreIn: genero,
             formatIn: formato,
-            episodes : undefined
+            episodes : undefined,
+            popularityGreater: popularidad
 
         },
     })
@@ -75,6 +78,13 @@ export const Lista:FC<ListaInputs> = ({format,genre}) => {
             setGenero(genre)
         }
     },[genre])
+
+    useEffect(() => {
+        if(popularity) {
+            setPopularidad(popularity)
+        }
+    },[popularity])
+    
 
     return (
         <div className="listaComponent">
