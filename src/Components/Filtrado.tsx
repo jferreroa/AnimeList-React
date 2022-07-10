@@ -96,7 +96,7 @@ const FormularioInput =  styled.input `
   text-align: center;
 `
 
-const FormularioButton = styled.button`
+export const FormularioButton = styled.button`
   background-color: white;
   color:black;
   height: 38px;

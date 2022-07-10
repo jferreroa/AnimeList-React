@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client'
 import React, { FC, useEffect, useState } from 'react'
-
+import { FormularioButton } from './Filtrado'
 type tipo_ResultadoQuery = {
     Page: {
         pageInfo: { total: number };
@@ -43,27 +43,27 @@ query($page: Int, $genreIn: [String], $formatIn: [MediaFormat], $episodes: Int, 
 
 
 type ListaInputs = {
-    format:string | undefined,
-    genre:string | undefined,
+    format: string | undefined,
+    genre: string | undefined,
     popularity: number,
-    episodes: number  | undefined,
+    episodes: number | undefined,
 }
 
 
 
-export const Lista:FC<ListaInputs> = ({format,genre,popularity, episodes}) => {
+export const Lista: FC<ListaInputs> = ({ format, genre, popularity, episodes }) => {
     const [pagina, setPagina] = useState<number>(1)
     const [genero, setGenero] = useState<string | undefined>(undefined)
     const [formato, setFormato] = useState<string | undefined>(undefined)
     const [popularidad, setPopularidad] = useState<number>(0)
-    const [episodios, setEpisodios ] = useState<number | undefined >(undefined)
+    const [episodios, setEpisodios] = useState<number | undefined>(undefined)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, loading, error, refetch } = useQuery<tipo_ResultadoQuery>(GET_PAGE, {
         variables: {
             page: pagina,
             genreIn: genero,
             formatIn: formato,
-            episodes : episodios,
+            episodes: episodios,
             popularityGreater: popularidad
 
         },
@@ -73,44 +73,49 @@ export const Lista:FC<ListaInputs> = ({format,genre,popularity, episodes}) => {
         if (format) {
             setFormato(format)
         }
-    },[format])
+    }, [format])
 
     useEffect(() => {
-        if(genre) {
+        if (genre) {
             setGenero(genre)
         }
-    },[genre])
+    }, [genre])
 
     useEffect(() => {
-        if(popularity) {
+        if (popularity) {
             setPopularidad(popularity)
         }
-    },[popularity])
+    }, [popularity])
 
-    useEffect (() => {
-        if(episodes) {
+    useEffect(() => {
+        if (episodes) {
             setEpisodios(episodes)
         }
-    },[episodes])
-    
+    }, [episodes])
+
 
     return (
         <div className="listaComponent">
             <div className="lista">
-                {data && data.Page.media.map((elem, index: number) => (<div className="anime" key={index}>
-                    <div>
-                        <img src={elem.coverImage.large} alt="img" className="image"></img>
+                {data && data.Page.media.map((elem, index: number) => (
+                    <div className="anime" key={index}>
+                        <div>
+                            <img src={elem.coverImage.large} alt="img" className="image"></img>
+                        </div>
+                        {elem.title.english}
+                        {!elem.title.english && elem.title.native}
+                        {/*"  - " + elem.format*/}
                     </div>
-                    {elem.title.english}
-                    {!elem.title.english && elem.title.native}
-                    {"  - " + elem.format}
-                </div>))}
+                ))}
 
             </div>
             <div className="botones">
-                {pagina > 1 && <button onClick={() => { setPagina(pagina - 1) }}>Prev</button>}
-                {pagina < data?.Page.pageInfo.total! && <button onClick={() => { setPagina(pagina + 1) }}>Next</button>}
-                {"    PAGINA Nº " + pagina + " de " + data?.Page.pageInfo.total} 
+                {pagina > 1 && <FormularioButton onClick={() => { setPagina(pagina - 1) }}>Prev</FormularioButton>}
+                {pagina < data?.Page.pageInfo.total! && <FormularioButton onClick={() => { setPagina(pagina + 1) }}>Next</FormularioButton>}
+
+            </div>
+            <div className='paginado'>
+                {"    PAGINA Nº " + pagina + " de " + data?.Page.pageInfo.total}
             </div>
         </div>
     )
