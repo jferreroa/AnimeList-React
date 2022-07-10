@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useState } from 'react'
 import Select from 'react-select'
-
+import styled from '@emotion/styled'
 
 type FiltradoInputs = {
   changeFormato: (formato: string | undefined) => void,
   changeGenero: (genero: string | undefined) => void,
   changePopularity: (popularity: number) => void,
+  changeEpisodios:(episodios: number|undefined) => void;
 }
 
 
@@ -34,10 +35,11 @@ const GENRE = [
 
 
 
-export const Filtrado: FC<FiltradoInputs> = ({ changeFormato, changeGenero, changePopularity }) => {
+export const Filtrado: FC<FiltradoInputs> = ({ changeFormato, changeGenero, changePopularity, changeEpisodios }) => {
   const [formato, setFormato] = useState<string | undefined>(undefined)
   const [genero, setGenero] = useState<string | undefined>(undefined)
   const [popularity, setPopularity] = useState<number>(0)
+  const [episodes, setEpisodes] = useState<number | undefined>(undefined)
 
   useEffect(() => {
     if (formato) {
@@ -65,14 +67,42 @@ export const Filtrado: FC<FiltradoInputs> = ({ changeFormato, changeGenero, chan
     <div className="formulario" id={"sw"}>
       <Select options={FORMAT} onChange={onDropChangeFormato} />
       <Select options={GENRE} onChange={onDropChangeGenero} />
-      <div>
-        <input type="text" placeholder="POPULARIDAD MAYOR A: " onChange={(e) => setPopularity(Number(e.target.value))}></input>
-        <button onClick={() => { 
+      <div className="input-popularidad">
+        <FormularioInput type="text" placeholder="POPULARIDAD MAYOR A: " onChange={(e) => setPopularity(Number(e.target.value))}></FormularioInput>
+        <FormularioButton onClick={() => { 
           //FALTA ESTILIZAR
           changePopularity(popularity)
-        }}>GO</button>
+        }}>GO</FormularioButton>
+      </div>
+      <div className = 'input-episodios'>
+        <FormularioInput type="text" placeholder="EPISODIOS: " onChange={(e) => setEpisodes(Number(e.target.value))}></FormularioInput>
+        <FormularioButton onClick={() => {
+          changeEpisodios(episodes)
+        }}>GO</FormularioButton>
       </div>
 
     </div>
   )
 }
+
+
+const FormularioInput =  styled.input `
+  background-color: white;
+  color:black;
+  border-radius: 5px;
+  width: 95%;
+  height: 30px;
+  margin: 0px;
+  text-align: center;
+`
+
+const FormularioButton = styled.button`
+  background-color: white;
+  color:black;
+  height: 38px;
+  border-radius: 5px;
+  width: 87px;
+  &:hover{
+    cursor: pointer;
+  }
+`
