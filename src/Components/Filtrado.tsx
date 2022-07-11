@@ -90,7 +90,7 @@ const FormularioInput =  styled.input `
   background-color: white;
   color:black;
   border-radius: 5px;
-  width: 95%;
+  width: 93%;
   height: 30px;
   margin: 0px;
   text-align: center;
@@ -101,7 +101,7 @@ export const FormularioButton = styled.button`
   color:black;
   height: 38px;
   border-radius: 5px;
-  width: 87px;
+  width: 95px;
   &:hover{
     cursor: pointer;
   }
