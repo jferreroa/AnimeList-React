@@ -60,11 +60,25 @@ body {
 }
 
 .modal{
- 
-  background-color:black;
-  width: 5000px;
+  margin-top: 40%;
+  display: flex;
+  margin-top:80px;
+  position: fixed;
+  background-color:red;
+  width: 500px;
+  border-radius: 5px;
+  
 }
 
 .mod>div{
   margin: 50px;
+}
+
+.modal-title{
+  align-self: center;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+
 }

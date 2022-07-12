@@ -29,17 +29,18 @@ export const InfoModal: FC<InfoModalProps> = ({ visibility, changeVisibility, ti
 
             <Modal show={show} onHide={handleClose} className="modal">
                 <Modal.Header>
-                    <Modal.Title>
+                    <Modal.Title className="modal-title">
                         {titleEn}
                         {!titleEn && titleNat}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="mod" >
-                        <DivInfo className="info" >
+                        <div className="info" >
+                            <p>Format: {format} </p>
                             <div> Nº Episodes {episodes | 0} </div>
                             <div > Popularity rate {popularity} </div>
-                        </DivInfo>
+                        </div>
                     </div>
 
 
@@ -58,8 +59,3 @@ export const InfoModal: FC<InfoModalProps> = ({ visibility, changeVisibility, ti
 }
 
 
-const DivInfo = styled.div`
-
-    width: 50%;
-    border: 2px solid white;
-  `
