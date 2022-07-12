@@ -1,9 +1,17 @@
 body {
   display: flex;
+  font-family: Arial, Helvetica, sans-serif;
   justify-content: center;
   background-color:#1E1E1E;
   color:white;
-  background-image: url("http://cdn23.us1.fansshare.com/photos/animewallpaper/anime-hd-wallpaper-kostenlos-wallpaper-2011396039.jpg")
+  background-image: url("http://cdn23.us1.fansshare.com/photos/animewallpaper/anime-hd-wallpaper-kostenlos-wallpaper-2011396039.jpg");
+  color: white;
+  font-size: 20px;
+  text-shadow:
+        0.05em 0 black,
+        0 0.05em black,
+        -0.05em 0 black,
+        0 -0.05em black,
 }
 
 .lista{
@@ -49,4 +57,14 @@ body {
 .paginado{
   display: flex;
   justify-content: center;
+}
+
+.modal{
+ 
+  background-color:black;
+  width: 5000px;
+}
+
+.mod>div{
+  margin: 50px;
 }

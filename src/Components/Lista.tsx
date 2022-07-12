@@ -1,5 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import React, { FC, useEffect, useState } from 'react'
+import { Anime } from './Anime'
+
 import { FormularioButton } from './Filtrado'
 type tipo_ResultadoQuery = {
     Page: {
@@ -12,7 +14,8 @@ type tipo_ResultadoQuery = {
                 large: string
             }
             genres: Array<string>
-            format: string
+            format: string,
+            popularity: number
         }>
     }
 }
@@ -35,7 +38,7 @@ query($page: Int, $genreIn: [String], $formatIn: [MediaFormat], $episodes: Int, 
                 }
                 genres
                 format
-              popularity
+                popularity
             }
         }
     }
@@ -93,18 +96,31 @@ export const Lista: FC<ListaInputs> = ({ format, genre, popularity, episodes }) 
         }
     }, [episodes])
 
+    //api rest
+    useEffect(() => {
+        //https://www.omdbapi.com/?apikey=afc8778c&t=dragon+ball
+    },[])
+
 
     return (
         <div className="listaComponent">
             <div className="lista">
                 {data && data.Page.media.map((elem, index: number) => (
-                    <div className="anime" key={index}>
-                        <div>
+                    <div className="anime" key={elem.siteUrl}>
+                        <Anime titleNative={elem.title.english}
+                            titleEnglish={elem.title.native}
+                            episodes={elem.episodes}
+                            siteUrl={elem.siteUrl}
+                            coverImage={elem.coverImage}
+                            popularity={elem.popularity}
+                            format={elem.format}
+                        ></Anime>
+                        {/*<div>
                             <img src={elem.coverImage.large} alt="img" className="image"></img>
                         </div>
                         {elem.title.english}
                         {!elem.title.english && elem.title.native}
-                        {/*"  - " + elem.format*/}
+                        {"  - " + elem.format}*/}
                     </div>
                 ))}
 
