@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import React, { FC, useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap';
 import { FormularioButton } from './Filtrado';
@@ -40,6 +39,8 @@ export const InfoModal: FC<InfoModalProps> = ({ visibility, changeVisibility, ti
                             <p>Format: {format} </p>
                             <div> Nº Episodes {episodes | 0} </div>
                             <div > Popularity rate {popularity} </div>
+                            <div>.</div>
+                            <div className="imgModal">{coverImg.large} </div>
                         </div>
                     </div>
 

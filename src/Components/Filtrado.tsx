@@ -6,7 +6,7 @@ type FiltradoInputs = {
   changeFormato: (formato: string | undefined) => void,
   changeGenero: (genero: string | undefined) => void,
   changePopularity: (popularity: number) => void,
-  changeEpisodios:(episodios: number|undefined) => void;
+  changeEpisodios: (episodios: number | undefined) => void;
 }
 
 
@@ -69,12 +69,12 @@ export const Filtrado: FC<FiltradoInputs> = ({ changeFormato, changeGenero, chan
       <Select options={GENRE} onChange={onDropChangeGenero} />
       <div className="input-popularidad">
         <FormularioInput type="text" placeholder="POPULARIDAD MAYOR A: " onChange={(e) => setPopularity(Number(e.target.value))}></FormularioInput>
-        <FormularioButton onClick={() => { 
+        <FormularioButton onClick={() => {
           //FALTA ESTILIZAR
           changePopularity(popularity)
         }}>GO</FormularioButton>
       </div>
-      <div className = 'input-episodios'>
+      <div className='input-episodios'>
         <FormularioInput type="text" placeholder="EPISODIOS: " onChange={(e) => setEpisodes(Number(e.target.value))}></FormularioInput>
         <FormularioButton onClick={() => {
           changeEpisodios(episodes)
@@ -86,7 +86,7 @@ export const Filtrado: FC<FiltradoInputs> = ({ changeFormato, changeGenero, chan
 }
 
 
-const FormularioInput =  styled.input `
+const FormularioInput = styled.input`
   background-color: white;
   color:black;
   border-radius: 5px;

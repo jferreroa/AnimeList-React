@@ -1,4 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
+import styled from '@emotion/styled'
 import React, { FC, useEffect, useState } from 'react'
 import { Anime } from './Anime'
 
@@ -53,6 +54,19 @@ type ListaInputs = {
 }
 
 
+type Characters = {
+    name: string,
+    height: string,
+    mass: string,
+    hair_color: string,
+    skin_color:string,
+    eye_color: string,
+    birth_year: string,
+    gender: string,
+
+}
+
+
 
 export const Lista: FC<ListaInputs> = ({ format, genre, popularity, episodes }) => {
     const [pagina, setPagina] = useState<number>(1)
@@ -60,10 +74,12 @@ export const Lista: FC<ListaInputs> = ({ format, genre, popularity, episodes }) 
     const [formato, setFormato] = useState<string | undefined>(undefined)
     const [popularidad, setPopularidad] = useState<number>(0)
     const [episodios, setEpisodios] = useState<number | undefined>(undefined)
+    const [arraySw, setArraySW] = useState<Characters[] | undefined>(undefined)
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { data, loading, error, refetch } = useQuery<tipo_ResultadoQuery>(GET_PAGE, {
         variables: {
-            page: pagina,
+            page: pagina,        
             genreIn: genero,
             formatIn: formato,
             episodes: episodios,
@@ -98,8 +114,20 @@ export const Lista: FC<ListaInputs> = ({ format, genre, popularity, episodes }) 
 
     //api rest
     useEffect(() => {
-        //https://www.omdbapi.com/?apikey=afc8778c&t=dragon+ball
-    },[])
+        console.log("obeteniendo datos")
+        const people = ""
+        fetch(`https://swapi.dev/api/people${people}/`)
+            .then(res => res.json())
+            .then(res => {
+                setArraySW(res.results)
+            })
+    }, [])
+
+    useEffect(() => {
+        if (arraySw) {
+            console.log(arraySw)
+        }
+    }, [arraySw])
 
 
     return (
@@ -133,6 +161,34 @@ export const Lista: FC<ListaInputs> = ({ format, genre, popularity, episodes }) 
             <div className='paginado'>
                 {"    PAGINA Nº " + pagina + " de " + data?.Page.pageInfo.total}
             </div>
+            <DivSW className="starW">
+                {arraySw?.map((elem: Characters, index:number) => (<DivChar className ="personaje-sw" key={index}>
+                   <h1>{elem.name}</h1>
+                   <h2>{elem.gender + ", " + elem.height + "cm"}</h2>
+                   <div>{elem.birth_year + "  -  " + elem.hair_color + " " + elem.mass + "kg"}</div>
+                </DivChar>))}
+            </DivSW>
         </div>
     )
 }
+
+
+const DivSW = styled.div`
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+`
+
+const DivChar =  styled.div`
+    border-radius: 5px;
+    justify-content:center;
+    width: 40%;
+    margin: 10px;
+    color: #ff002b;
+    border: 2px solid pink;
+    padding: 10px;
+`
+

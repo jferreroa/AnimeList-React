@@ -4,7 +4,7 @@ body {
   justify-content: center;
   background-color:#1E1E1E;
   color:white;
-  background-image: url("http://cdn23.us1.fansshare.com/photos/animewallpaper/anime-hd-wallpaper-kostenlos-wallpaper-2011396039.jpg");
+  
   color: white;
   font-size: 20px;
   text-shadow:
@@ -63,7 +63,7 @@ body {
   margin-top: 40%;
   display: flex;
   margin-top:80px;
-  position: fixed;
+  position: absolute;
   background-color:red;
   width: 500px;
   border-radius: 5px;
@@ -81,4 +81,13 @@ body {
   font-weight: bold;
   color: white;
 
+}
+
+
+.peces{
+  color:rgb(255, 0, 200);
+}
+
+.imgModal{
+width: 50%;
 }
