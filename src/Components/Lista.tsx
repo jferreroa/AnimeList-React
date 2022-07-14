@@ -72,7 +72,7 @@ export const Lista: FC<ListaInputs> = ({ format, genre, popularity, episodes }) 
     const [pagina, setPagina] = useState<number>(1)
     const [genero, setGenero] = useState<string | undefined>(undefined)
     const [formato, setFormato] = useState<string | undefined>(undefined)
-    const [popularidad, setPopularidad] = useState<number | undefined>(undefined)
+    const [popularidad, setPopularidad] = useState<number |undefined>(undefined)
     const [episodios, setEpisodios] = useState<number | undefined>(undefined)
     const [arraySw, setArraySW] = useState<Characters[] | undefined>(undefined)
 
